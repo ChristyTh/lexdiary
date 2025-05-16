@@ -21,3 +21,5 @@ pip-wheel-metadata/
 
 # macOS
 .DS_Store
+
+.env
