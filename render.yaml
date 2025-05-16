@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: lexdiary
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn lexdiary.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: lexdiary.settings
+      - key: DEBUG
+        value: false
+      - key: SECRET_KEY
+        generateValue: true

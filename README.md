@@ -25,5 +25,5 @@ LexDiary is a Django-based personal case and stage management tool designed for 
 1. **Clone the repo**
 
 ```bash
-git clone https://github.com/yourusername/lexdiary.git
+git clone https://github.com/ChristyTh/lexdiary.git
 cd lexdiary
