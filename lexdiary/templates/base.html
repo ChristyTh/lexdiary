@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LexDiary</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/">LexDiary</a>
+    <div class="ms-auto">
+      {% if user.is_authenticated %}
+        <span class="text-white me-3">Hi, {{ user.username }}</span>
+        <a href="{% url 'users:logout' %}" class="btn btn-outline-light btn-sm">Logout</a>
+      {% else %}
+        <a href="{% url 'users:login' %}" class="btn btn-outline-light btn-sm me-2">Login</a>
+        <a href="{% url 'users:register' %}" class="btn btn-outline-light btn-sm">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

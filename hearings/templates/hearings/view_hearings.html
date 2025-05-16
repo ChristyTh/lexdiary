@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Hearings for {{ case.case_number }} - {{ case.case_name }}</h2>
+<a href="{% url 'hearings:add_hearing' case.id %}" class="btn btn-success mb-3">➕ Add Hearing</a>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Stage</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for hearing in hearings %}
+      <tr>
+        <td>{{ hearing.hearing_date }}</td>
+        <td>{{ hearing.stage }}</td>
+        <td>{{ hearing.notes }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="3">No hearings added yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'cases:list_cases' %}" class="btn btn-secondary mt-2">Back to Cases</a>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-4">📊 LexDiary Dashboard</h2>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card text-bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Total Cases</h5>
+        <p class="card-text fs-3">{{ total_cases }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Total Hearings</h5>
+        <p class="card-text fs-3">{{ total_hearings }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-4">📅 Hearings on {{ selected_date }}</h4>
+<form method="get" class="mb-3">
+  <div class="row g-2 align-items-center">
+    <div class="col-auto">
+      <input type="date" name="date" class="form-control" value="{{ selected_date }}">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-primary">View</button>
+    </div>
+  </div>
+</form>
+
+{% if hearings_for_date %}
+  <table class="table table-bordered">
+    <thead>
+      <tr><th>Case Number</th><th>Case Name</th><th>Stage</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      {% for hearing in hearings_for_date %}
+        <tr>
+          <td>{{ hearing.case.case_number }}</td>
+          <td>{{ hearing.case.case_name }}</td>
+          <td>{{ hearing.stage }}</td>
+          <td>{{ hearing.notes }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No hearings on this date.</p>
+{% endif %}
+
+<h4 class="mt-5">🗓 Upcoming Hearings</h4>
+{% if upcoming_hearings %}
+  <ul class="list-group">
+    {% for hearing in upcoming_hearings %}
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <strong>{{ hearing.hearing_date }}</strong> —
+          {{ hearing.case.case_number }}: {{ hearing.case.case_name }}
+        </div>
+        <span class="badge bg-info text-dark">{{ hearing.stage }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No upcoming hearings scheduled.</p>
+{% endif %}
+
+<h4 class="mt-5">📂 Your Cases</h4>
+
+{% if user_cases %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Case Number</th>
+        <th>Case Name</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for case in user_cases %}
+        <tr>
+          <td>{{ case.case_number }}</td>
+          <td>{{ case.case_name }}</td>
+          <td>{{ case.created_at|date:"M d, Y H:i" }}</td>
+          <td>
+            <a href="{% url 'hearings:add_hearing' case.id %}" class="btn btn-sm btn-outline-primary me-1">➕ Add Hearing</a>
+            <a href="{% url 'hearings:view_hearings' case.id %}" class="btn btn-sm btn-outline-secondary">📄 View More</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>You haven't added any cases yet.</p>
+  <a href="{% url 'cases:add_case' %}" class="btn btn-success">➕ Add Your First Case</a>
+{% endif %}
+
+
+{% endblock %}

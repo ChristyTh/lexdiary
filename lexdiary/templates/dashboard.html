@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-4">📊 LexDiary Dashboard</h2>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card text-bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Total Cases</h5>
+        <p class="card-text fs-3">{{ total_cases }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Total Stages</h5>
+        <p class="card-text fs-3">{{ total_stages }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-4">📅 Stages on {{ selected_date }}</h4>
+<form method="get" class="mb-3">
+  <div class="row g-2 align-items-center">
+    <div class="col-auto">
+      <input type="date" name="date" class="form-control" value="{{ selected_date }}">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-primary">View</button>
+    </div>
+  </div>
+</form>
+
+{% if stages_for_date %}
+  <table class="table table-bordered">
+    <thead>
+      <tr><th>Case Number</th><th>Case Name</th><th>Stage</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      {% for stage in stages_for_date %}
+        <tr>
+          <td>{{ stage.case.case_number }}</td>
+          <td>{{ stage.case.case_name }}</td>
+          <td>{{ stage.stage_name }}</td>
+          <td>{{ stage.notes }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No stages on this date.</p>
+{% endif %}
+
+<h4 class="mt-5">🗓 Upcoming Stages</h4>
+{% if upcoming_stages %}
+  <ul class="list-group">
+    {% for stage in upcoming_stages %}
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <strong>{{ stage.date }}</strong> —
+          {{ stage.case.case_number }}: {{ stage.case.case_name }}
+        </div>
+        <span class="badge bg-info text-dark">{{ stage.stage_name }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No upcoming stages scheduled.</p>
+{% endif %}
+
+<h4 class="mt-5">📂 Your Cases</h4>
+
+{% if user_cases %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Case Number</th>
+        <th>Case Name</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for case in user_cases %}
+        <tr>
+          <td>{{ case.case_number }}</td>
+          <td>{{ case.case_name }}</td>
+          <td>{{ case.created_at|date:"M d, Y H:i" }}</td>
+          <td>
+            <a href="{% url 'stages:add_stage' case.id %}" class="btn btn-sm btn-outline-primary me-1">➕ Add Stage</a>
+            <a href="{% url 'stages:view_stages' case.id %}" class="btn btn-sm btn-outline-secondary">📄 View More</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>You haven't added any cases yet.</p>
+  <a href="{% url 'cases:add_case' %}" class="btn btn-success">➕ Add Your First Case</a>
+{% endif %}
+
+{% endblock %}

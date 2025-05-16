@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>📅 Hearings on {{ selected_date }}</h2>
+
+<form method="get" class="mb-3">
+  <div class="row g-2 align-items-center">
+    <div class="col-auto">
+      <label for="date" class="col-form-label">Select Date:</label>
+    </div>
+    <div class="col-auto">
+      <input type="date" name="date" id="date" class="form-control" value="{{ selected_date }}">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">View</button>
+    </div>
+  </div>
+</form>
+
+{% if hearings %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Case Number</th>
+        <th>Case Name</th>
+        <th>Stage</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for hearing in hearings %}
+        <tr>
+          <td>{{ hearing.case.case_number }}</td>
+          <td>{{ hearing.case.case_name }}</td>
+          <td>{{ hearing.stage }}</td>
+          <td>{{ hearing.notes }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No hearings scheduled for this date.</p>
+{% endif %}
+
+<a href="{% url 'cases:list_cases' %}" class="btn btn-secondary mt-3">← Back to Cases</a>
+{% endblock %}

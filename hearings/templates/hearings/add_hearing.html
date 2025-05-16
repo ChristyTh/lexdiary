@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Hearing for {{ case.case_number }} - {{ case.case_name }}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Save Hearing</button>
+</form>
+<a href="{% url 'hearings:view_hearings' case.id %}" class="btn btn-secondary mt-2">Back to Hearings</a>
+{% endblock %}
