@@ -10,4 +10,7 @@ services:
       - key: DEBUG
         value: false
       - key: SECRET_KEY
-        generateValue: true
+        value: ioinhcvri9sy(18(s!rcvxw8^72fwcm5fmgi(jp_bt5rbq)k-u
+    preDeployCommand: |
+      python manage.py migrate
+      python manage.py collectstatic --noinput

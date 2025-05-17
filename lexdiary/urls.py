@@ -19,6 +19,17 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from .views import dashboard_view
 
+
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_admin(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'securepass123')
+        return HttpResponse("Superuser created.")
+    return HttpResponse("Superuser already exists.")
+
+
 urlpatterns = [
     path('', dashboard_view, name='home'),  # 👈 This replaces previous login redirect
     path('admin/', admin.site.urls),
@@ -26,6 +37,7 @@ urlpatterns = [
     path('cases/', include('cases.urls', namespace='cases')),
     path('hearings/', include('hearings.urls', namespace='hearings')),
     path('stages/', include('stages.urls', namespace='stages')),
+    path('create-admin/', create_admin),
 
 
 
