@@ -145,7 +145,7 @@ LOGIN_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # if using a global static folder
+#STATICFILES_DIRS = [BASE_DIR / 'static']  # if using a global static folder
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
