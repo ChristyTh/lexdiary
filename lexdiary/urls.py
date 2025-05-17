@@ -18,10 +18,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 from .views import dashboard_view
+from django.core.management import call_command
 
 
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+
+def setup_view(request):
+    try:
+        call_command("migrate", interactive=False)
+        call_command("collectstatic", interactive=False, verbosity=0)
+        return HttpResponse("✅ Migrations and collectstatic completed.")
+    except Exception as e:
+        return HttpResponse(f"❌ Error: {str(e)}", status=500)
 
 def create_admin(request):
     if not User.objects.filter(username='admin').exists():
@@ -38,6 +47,7 @@ urlpatterns = [
     path('hearings/', include('hearings.urls', namespace='hearings')),
     path('stages/', include('stages.urls', namespace='stages')),
     path('create-admin/', create_admin),
+    path("run-setup/", setup_view),
 
 
 
