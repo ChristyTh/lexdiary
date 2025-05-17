@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
-from .views import dashboard_view, list_static_files
+from .views import dashboard_view, list_static_files, run_collectstatic
 from django.core.management import call_command
 
 
@@ -34,7 +34,8 @@ urlpatterns = [
     path('hearings/', include('hearings.urls', namespace='hearings')),
     path('stages/', include('stages.urls', namespace='stages')),
 
-    path('check-static/', list_static_files)
+    path('check-static/', list_static_files),
+    path('run-collectstatic/', run_collectstatic),
 
 
 

@@ -9,6 +9,16 @@ from django.conf import settings
 from django.http import JsonResponse
 import os
 
+import subprocess
+from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
+
+@staff_member_required
+def run_collectstatic(request):
+    result = subprocess.run(["python", "manage.py", "collectstatic", "--noinput"], capture_output=True, text=True)
+    return HttpResponse(f"<pre>{result.stdout}\n{result.stderr}</pre>")
+
+
 def list_static_files(request):
     static_dir = settings.STATIC_ROOT
     file_list = []
