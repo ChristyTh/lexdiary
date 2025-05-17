@@ -7,7 +7,8 @@ __pycache__/
 db.sqlite3
 *.log
 .env
-staticfiles
+/staticfiles/
+
 
 
 # Virtualenv
