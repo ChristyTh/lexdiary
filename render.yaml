@@ -11,6 +11,8 @@ services:
         value: false
       - key: SECRET_KEY
         value: ioinhcvri9sy(18(s!rcvxw8^72fwcm5fmgi(jp_bt5rbq)k-u
+      - key: DATABASE_URL
+        value: postgresql://lexdiary_db_user:pxw6MHhAq1hpGXjBRVYYxZAMYm3IGvnL@dpg-d0jlv6a4d50c73ffckfg-a/lexdiary_db
     preDeployCommand: |
-      python manage.py migrate
+      python manage.py migrate --noinput
       python manage.py collectstatic --noinput
