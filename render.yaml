@@ -14,5 +14,7 @@ services:
       - key: DATABASE_URL
         value: postgresql://lexdiary_db_user:pxw6MHhAq1hpGXjBRVYYxZAMYm3IGvnL@dpg-d0jlv6a4d50c73ffckfg-a/lexdiary_db
     preDeployCommand: |
+      echo "Applying DB migrations..."
       python manage.py migrate --noinput
+      echo "Collecting static files..."
       python manage.py collectstatic --noinput
