@@ -4,6 +4,24 @@ from django.utils.timezone import now
 from cases.models import Case
 from stages.models import Stage
 
+
+from django.conf import settings
+from django.http import JsonResponse
+import os
+
+def list_static_files(request):
+    static_dir = settings.STATIC_ROOT
+    file_list = []
+
+    for root, dirs, files in os.walk(static_dir):
+        for file in files:
+            file_path = os.path.relpath(os.path.join(root, file), static_dir)
+            file_list.append(file_path)
+
+    return JsonResponse({'static_files': file_list})
+
+
+
 @login_required
 def dashboard_view(request):
     selected_date = request.GET.get('date')
