@@ -7,12 +7,13 @@ class Case(models.Model):
         ('open', 'Open'),
         ('closed', 'Closed'),
     ]
-
+    court = models.CharField(max_length=255, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     case_number = models.CharField(max_length=100, unique=True)
     case_name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='open')
+
 
     def __str__(self):
         return f"{self.case_number} - {self.case_name}"

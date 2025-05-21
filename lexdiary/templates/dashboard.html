@@ -22,7 +22,14 @@
   </div>
 </div>
 
-<h4 class="mt-4">📅 Cases on {{ selected_date }}</h4>
+<h4 class="mt-4">
+  📅 {% if selected_date == today %}
+    Cases Today
+  {% else %}
+    Cases on {{ selected_date|date:"F d, Y" }}
+  {% endif %}
+</h4>
+
 <form method="get" class="mb-3">
   <div class="row g-2 align-items-center">
     <div class="col-auto">
@@ -37,11 +44,18 @@
 {% if stages_for_date %}
   <table class="table table-bordered">
     <thead>
-      <tr><th>Case Number</th><th>Case Name</th><th>Stage</th><th>Notes</th></tr>
+      <tr>
+        <th>court</th>
+        <th>Case Number</th>
+        <th>Case Name</th>
+        <th>Stage</th>
+        <th>Notes</th>
+      </tr>
     </thead>
     <tbody>
       {% for stage in stages_for_date %}
         <tr>
+          <td>{{ stage.case.court }}</td>
           <td>{{ stage.case.case_number }}</td>
           <td>{{ stage.case.case_name }}</td>
           <td>{{ stage.stage_name }}</td>
@@ -71,12 +85,21 @@
   <p>No upcoming stages scheduled.</p>
 {% endif %}
 
+
 <h4 class="mt-5">📂 Your Cases</h4>
+
+<div class="mb-3 d-flex justify-content-between">
+  <div>
+    <a href="{% url 'cases:list_cases' %}" class="btn btn-outline-secondary me-2">📄 View Cases</a>
+    <a href="{% url 'cases:add_case' %}" class="btn btn-success">➕ Add Case</a>
+  </div>
+</div>
 
 {% if user_cases %}
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Court</th>
         <th>Case Number</th>
         <th>Case Name</th>
         <th>Created At</th>
@@ -86,6 +109,7 @@
     <tbody>
       {% for case in user_cases %}
         <tr>
+          <td>{{ case.court }}</td>
           <td>{{ case.case_number }}</td>
           <td>{{ case.case_name }}</td>
           <td>{{ case.created_at|date:"M d, Y H:i" }}</td>
@@ -101,5 +125,7 @@
   <p>You haven't added any cases yet.</p>
   <a href="{% url 'cases:add_case' %}" class="btn btn-success">➕ Add Your First Case</a>
 {% endif %}
+
+
 
 {% endblock %}

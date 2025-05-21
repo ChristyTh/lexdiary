@@ -1,10 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <h2>Add Stage for {{ case.case_number }} - {{ case.case_name }}</h2>
-<form method="post">
+
+<form method="post" id="stage-form">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit" class="btn btn-primary">Save Stage</button>
 </form>
+
 <a href="{% url 'stages:view_stages' case.id %}" class="btn btn-secondary mt-2">Back to Stages</a>
+
+<!-- Tagify CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" />
+<!-- Tagify JS -->
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.querySelector('.tagify-stage');
+    if (input) {
+      const tagify = new Tagify(input, {
+        whitelist: [
+          "Return of Summons",
+          "Filing of Surety",
+          "Charge/Plea",
+          "Evidence",
+          "Evidence Part Heard",
+          "Further Chief Examination",
+          "Cross Examination",
+          "Arguments",
+          "Statement u/s 313 Crpc",
+          "Defence Evidence",
+          "Steps",
+          "Bailable Warrant",
+          "Non Bailable Warrant",
+          "Judgement",
+          "Order on Exhibit",
+          "Hearing on Exhibit",
+          "Say",
+          "Other Side to Say",
+          "Reissue Notice",
+          "Apperance"
+        ],
+        enforceWhitelist: false,
+        dropdown: {
+          enabled: 0,
+          closeOnSelect: false
+        },
+        maxTags: 1
+      });
+
+      // Ensure plain text gets submitted
+      const form = document.getElementById('stage-form');
+      form.addEventListener('submit', function () {
+        const value = tagify.value[0]?.value || '';
+        input.value = value;
+      });
+    }
+  });
+</script>
+
 {% endblock %}

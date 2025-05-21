@@ -1,35 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container mt-4">
-  <h2>Add Case</h2>
-  <form method="post" id="case-form">
-    {% csrf_token %}
-    <div class="mb-3">
-      {{ form.case_number.label_tag }}
-      {{ form.case_number }}
-    </div>
-    <div class="mb-3">
-      {{ form.case_name.label_tag }}
-      {{ form.case_name }}
-    </div>
+<h2>Edit Case: {{ case.case_number }}</h2>
 
-    <div class="mb-3">
-      {{ form.court.label_tag }}
-      {{ form.court }}
-    </div>
-
-    
-    <div class="mb-3">
-      {{ form.status.label_tag }}
-      {{ form.status }}
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Save Case</button>
-  </form>
-</div>
+<form method="post" id="case-form">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Update Case</button>
+  <a href="{% url 'cases:list_cases' %}" class="btn btn-secondary">Cancel</a>
+</form>
 
 <!-- Tagify CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" />
 <!-- Tagify JS -->
 <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
 
@@ -56,13 +37,15 @@
         maxTags: 1
       });
 
-      // ✅ Intercept form submission and inject plain text
+      // ✅ Ensure plain text is submitted
       const form = document.getElementById('case-form');
       form.addEventListener('submit', function () {
         const firstTag = tagify.value[0]?.value || '';
-        input.value = firstTag;  // Set actual input value to plain string
+        input.value = firstTag;
       });
     }
   });
 </script>
+
+
 {% endblock %}

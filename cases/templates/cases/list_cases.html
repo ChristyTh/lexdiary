@@ -6,6 +6,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Court</th>
       <th>Case Number</th>
       <th>Case Name</th>
       <th>Created At</th>
@@ -15,12 +16,16 @@
   <tbody>
     {% for case in cases %}
       <tr>
+        <td>{{case.court}}</td>
         <td>{{ case.case_number }}</td>
         <td>{{ case.case_name }}</td>
         <td>{{ case.created_at|date:"M d, Y H:i" }}</td>
         <td>
           <a href="{% url 'stages:add_stage' case.id %}" class="btn btn-sm btn-outline-primary me-1">➕ Add Stage</a>
           <a href="{% url 'stages:view_stages' case.id %}" class="btn btn-sm btn-outline-secondary">📄 View Stages</a>
+          <a href="{% url 'cases:edit_case' case.id %}" class="btn btn-sm btn-warning me-1">✏️ Edit</a>
+          <a href="{% url 'cases:delete_case' case.id %}" class="btn btn-sm btn-danger">🗑 Delete</a>
+
         </td>
       </tr>
     {% empty %}

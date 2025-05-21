@@ -4,8 +4,7 @@ from .models import Case
 class CaseForm(forms.ModelForm):
     class Meta:
         model = Case
-        fields = ['case_number', 'case_name']
+        fields = ['court', 'case_number', 'case_name', 'status']
         widgets = {
-            'case_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'case_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'court': forms.TextInput(attrs={'class': 'tagify-input'}),
         }

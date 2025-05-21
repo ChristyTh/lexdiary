@@ -7,6 +7,6 @@ class StageForm(forms.ModelForm):
         fields = ['date', 'stage_name', 'notes']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'stage_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'stage_name': forms.TextInput(attrs={'class': 'form-control tagify-stage'}),
             'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }

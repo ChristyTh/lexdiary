@@ -29,4 +29,34 @@
     {% block content %}{% endblock %}
   </div>
 </body>
+
+<footer class="bg-light text-center text-lg-start mt-5 border-top pt-4">
+  <div class="container py-3">
+    <div class="row">
+      <!-- About Us -->
+      <div class="col-md-6 mb-3 mb-md-0 text-start">
+        <h6 class="text-uppercase fw-bold">About Us</h6>
+        <p class="mb-0">
+          LexDiary is a smart and simple case management system to help lawyers track their legal cases, hearings, and stages efficiently.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-6 text-md-end">
+        <h6 class="text-uppercase fw-bold">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="{% url 'cases:list_cases' %}" class="text-decoration-none text-dark">View Cases</a></li>
+          <li><a href="{% url 'cases:add_case' %}" class="text-decoration-none text-dark">Add Case</a></li>
+          <li><a href="{% url 'admin:index' %}" class="text-decoration-none text-dark">Admin Panel</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="text-center bg-secondary text-white py-2">
+    © 2025 Kavod Digital. All rights reserved.
+  </div>
+</footer>
+
 </html>
