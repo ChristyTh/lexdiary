@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>🔍 Filter Stages</h2>
+
+<form method="get" class="row g-2 mb-4">
+  <div class="col-md-4">
+    <label for="stage-select" class="form-label">Select Stage</label>
+    <select id="stage-select" name="stage_name" class="form-select" onchange="this.form.submit()">
+      <option value="">-- All Stages --</option>
+      {% for stage in stage_choices %}
+        <option value="{{ stage }}" {% if stage == selected_stage %}selected{% endif %}>{{ stage }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label for="date-input" class="form-label">Filter by Date</label>
+    <input type="date" id="date-input" name="date" class="form-control"
+           {% if selected_date %}value="{{ selected_date }}"{% endif %}>
+  </div>
+
+  <div class="col-md-4 align-self-end d-flex gap-2">
+    <button type="submit" class="btn btn-primary">Apply Filters</button>
+    <a href="/" class="btn btn-outline-secondary">⬅ Back to Dashboard</a>
+    <a href="{% url 'stages:filter_by_stage' %}" class="btn btn-outline-danger">❌ Clear Filters</a>
+  </div>
+</form>
+
+{% if stages %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Court</th>
+        <th>Case Number</th>
+        <th>Case Name</th>
+        <th>Stage Name</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stage in stages %}
+        <tr>
+          <td>{{ stage.date }}</td>
+          <td>{{ stage.case.court }}</td>
+          <td>{{ stage.case.case_number }}</td>
+          <td>{{ stage.case.case_name }}</td>
+          <td>{{ stage.stage_name }}</td>
+          <td>{{ stage.notes }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No stages found for the selected filters.</p>
+{% endif %}
+{% endblock %}

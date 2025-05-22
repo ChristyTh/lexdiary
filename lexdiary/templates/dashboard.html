@@ -22,6 +22,24 @@
   </div>
 </div>
 
+<h4 class="mt-5">📌 Most Frequent Stage Types</h4>
+<div class="row">
+  {% for item in stage_summary %}
+    <div class="col-md-4 mb-3">
+      <div class="card border-info">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ item.stage_name }}</h5>
+          <p class="card-text fs-4">{{ item.count }} time{{ item.count|pluralize }}</p>
+          <a href="{% url 'stages:filter_by_stage' %}?stage_name={{ stage_name|urlencode }}&date={{ selected_date|date:'Y-m-d' }} " class="btn btn-outline-info btn-sm">View All</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>No stage data available.</p>
+  {% endfor %}
+</div>
+
+
 <h4 class="mt-4">
   📅 {% if selected_date == today %}
     Cases Today
