@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
-from .views import dashboard_view
+from .views import dashboard_view, upcoming_stages_json
 from django.core.management import call_command
 
 
@@ -33,6 +33,7 @@ urlpatterns = [
     path('cases/', include('cases.urls', namespace='cases')),
     path('hearings/', include('hearings.urls', namespace='hearings')),
     path('stages/', include('stages.urls', namespace='stages')),
+    path('upcoming_stages_json/', upcoming_stages_json, name='upcoming_stages_json'),
 
 
 

@@ -25,6 +25,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from stages.models import Stage
 from cases.models import Case
+from dateutil.parser import parse as parse_date
 
 @login_required
 def dashboard_view(request):
@@ -64,3 +65,34 @@ def dashboard_view(request):
 
 
 
+
+
+@login_required
+def upcoming_stages_json(request):
+    start_date_str = request.GET.get('start')
+    end_date_str = request.GET.get('end')
+
+    stages = Stage.objects.filter(case__user=request.user)
+
+    try:
+        if start_date_str:
+            start_date = parse_date(start_date_str).date()
+            stages = stages.filter(date__gte=start_date)
+
+        if end_date_str:
+            end_date = parse_date(end_date_str).date()
+            stages = stages.filter(date__lte=end_date)
+
+    except Exception as e:
+        return JsonResponse({'error': f'Invalid date: {e}'}, status=400)
+
+    data = [
+        {
+            'title': f"{stage.case.case_number} - {stage.stage_name}",
+            'start': stage.date.isoformat(),
+            'url': f"/stages/filter/?date={stage.date.isoformat()}"
+        }
+        for stage in stages
+    ]
+
+    return JsonResponse(data, safe=False)
