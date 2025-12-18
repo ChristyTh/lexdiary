@@ -15,6 +15,7 @@ venv/
 env/
 *.egg-info/
 pip-wheel-metadata/
+.env/
 
 # IDE
 .vscode/
