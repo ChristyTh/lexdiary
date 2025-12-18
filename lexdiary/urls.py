@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from .views import dashboard_view, upcoming_stages_json
 from django.core.management import call_command
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 from django.contrib.auth.models import User
@@ -39,4 +41,4 @@ urlpatterns = [
 
 
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
