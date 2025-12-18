@@ -1,0 +1,338 @@
+/* ===============================
+   ROOT VARIABLES
+================================ */
+:root {
+    --black: #000;
+    --white: #fff;
+    --gray-light: #f5f5f5;
+    --gray: #ccc;
+    --gray-dark: #444;
+    --shadow: 0 8px 25px rgba(0,0,0,0.08);
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* ===============================
+   GLOBAL
+================================ */
+body {
+    background: var(--gray-light);
+    color: var(--black);
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.animate-on-scroll {
+    animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   HEADER
+================================ */
+.dashboard-title {
+    font-weight: 800;
+    font-size: 1.9rem;
+}
+
+.date-badge {
+    background: var(--black);
+    color: var(--white);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* ===============================
+   STAT CARDS
+================================ */
+.stat-card {
+    padding: 22px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+}
+
+.zebra-stat-dark {
+    background: var(--black);
+    color: var(--white);
+}
+
+.zebra-stat-light {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--gray);
+}
+
+.stat-icon-wrapper {
+    font-size: 2rem;
+    opacity: 0.85;
+}
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.stat-progress {
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.zebra-stat-light .stat-progress {
+    background: var(--gray);
+}
+
+.progress-bar {
+    height: 100%;
+    background: currentColor;
+}
+
+/* ===============================
+   SECTIONS
+================================ */
+.dashboard-section {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+}
+
+.section-header {
+    border-bottom: 1px solid var(--gray);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* ===============================
+   CALENDAR
+================================ */
+.dashboard-calendar {
+    background: var(--white);
+    border-radius: var(--radius);
+}
+
+.fc {
+    --fc-border-color: var(--gray);
+    --fc-button-bg-color: var(--black);
+    --fc-button-border-color: var(--black);
+    --fc-button-text-color: var(--white);
+}
+
+/* ===============================
+   STAGE CARDS
+================================ */
+.stage-card {
+    background: var(--gray-light);
+    border-radius: var(--radius);
+    padding: 18px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stage-card:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.stage-badge {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-weight: 700;
+}
+
+.stage-card:hover .stage-badge {
+    background: var(--white);
+    color: var(--black);
+}
+
+.stage-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* ===============================
+   TABLES
+================================ */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-table th {
+    background: var(--black);
+    color: var(--white);
+    padding: 12px;
+    text-align: left;
+}
+
+.dashboard-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--gray);
+}
+
+.dashboard-table tr:hover {
+    background: var(--gray-light);
+}
+
+.table-row-animate {
+    animation: rowFade 0.6s ease both;
+}
+
+@keyframes rowFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   BADGES
+================================ */
+.court-badge,
+.stage-tag {
+    background: var(--black);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+.status-badge.active {
+    background: var(--black);
+    color: var(--white);
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+}
+
+/* ===============================
+   TIMELINE
+================================ */
+.timeline-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.timeline-date {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px;
+    border-radius: var(--radius);
+    text-align: center;
+    min-width: 55px;
+}
+
+.timeline-title {
+    font-weight: 700;
+}
+
+/* ===============================
+   QUICK ACTIONS
+================================ */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.quick-action-card {
+    background: var(--gray-light);
+    border-radius: var(--radius);
+    padding: 18px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.quick-action-card:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.action-icon {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn-zebra-black {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 25px;
+    padding: 8px 18px;
+    border: none;
+}
+
+.btn-zebra-black:hover {
+    background: var(--gray-dark);
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.btn-action:hover {
+    background: var(--gray-dark);
+}
+
+/* ===============================
+   EMPTY STATES
+================================ */
+.empty-state,
+.empty-state-large {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray-dark);
+}
