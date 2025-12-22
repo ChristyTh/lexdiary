@@ -1,0 +1,106 @@
+/* ===============================
+   ADD CASE – ZEBRA THEME
+================================ */
+
+/* Container */
+.container {
+    max-width: 650px;
+}
+
+/* Heading */
+.container h2 {
+    font-weight: 800;
+    margin-bottom: 25px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* Form Card */
+#case-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Labels */
+#case-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: #000;
+}
+
+/* Inputs & Selects */
+#case-form input,
+#case-form select {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    background: #fff;
+    color: #000;
+}
+
+/* Focus */
+#case-form input:focus,
+#case-form select:focus {
+    border-color: #000;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+}
+
+/* Tagify Override */
+.tagify {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.tagify--focus {
+    border-color: #000;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+}
+
+.tagify__tag {
+    background: #000;
+    color: #fff;
+    border-radius: 16px;
+}
+
+.tagify__tag__removeBtn {
+    color: #fff;
+}
+
+/* Button */
+#case-form button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 30px;
+    border: none;
+    background: #000;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Button Hover */
+#case-form button:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* Form spacing */
+#case-form .mb-3 {
+    margin-bottom: 18px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    #case-form {
+        padding: 22px;
+    }
+}

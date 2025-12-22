@@ -1,0 +1,149 @@
+/* ===============================
+   YOUR CASES – ZEBRA THEME
+================================ */
+
+/* Page Heading */
+h2 {
+    font-weight: 800;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+
+/* Add Case Button */
+a.btn-success {
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+a.btn-success:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* Table Wrapper */
+.table {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Table Head */
+.table thead th {
+    background: #000;
+    color: #fff;
+    padding: 14px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Table Body */
+.table tbody td {
+    padding: 12px 14px;
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+/* Zebra Rows */
+.table-striped tbody tr:nth-of-type(odd) {
+    background: #f7f7f7;
+}
+
+/* Hover Effect */
+.table tbody tr:hover {
+    background: #eaeaea;
+}
+
+/* Action Buttons */
+.table .btn {
+    border-radius: 20px;
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Add Stage */
+.btn-outline-primary {
+    color: #000;
+    border: 1px solid #000;
+}
+
+.btn-outline-primary:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* View Stages */
+.btn-outline-secondary {
+    color: #444;
+    border: 1px solid #444;
+}
+
+.btn-outline-secondary:hover {
+    background: #444;
+    color: #fff;
+}
+
+/* Edit Button */
+.btn-warning {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.btn-warning:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* Delete Button */
+.btn-danger {
+    background: #000;
+    border: none;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #b00000;
+}
+
+/* Empty State */
+.table td[colspan] {
+    text-align: center;
+    font-weight: 600;
+    padding: 25px;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    }
+
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 14px;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+    }
+}
