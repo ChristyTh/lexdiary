@@ -12,7 +12,7 @@ db.sqlite3
 
 # Virtualenv
 venv/
-env/
+.env/
 *.egg-info/
 pip-wheel-metadata/
 .env/

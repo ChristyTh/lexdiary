@@ -1,135 +1,300 @@
 /* ===============================
-   ROOT VARIABLES
+   DASHBOARD COMPONENT STYLES
 ================================ */
 :root {
     --black: #000;
     --white: #fff;
     --gray-light: #f5f5f5;
-    --gray: #ccc;
-    --gray-dark: #444;
+    --gray: #e0e0e0;
+    --gray-dark: #666;
     --shadow: 0 8px 25px rgba(0,0,0,0.08);
-    --radius: 12px;
+    --radius: 16px;
     --transition: all 0.3s ease;
 }
 
 /* ===============================
-   GLOBAL
+   ANIMATIONS
 ================================ */
-body {
-    background: var(--gray-light);
-    color: var(--black);
-    font-family: "Segoe UI", system-ui, sans-serif;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.animate-on-scroll {
-    animation: fadeUp 0.8s ease both;
-}
-
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===============================
-   HEADER
-================================ */
-.dashboard-title {
-    font-weight: 800;
-    font-size: 1.9rem;
+.animate-on-scroll {
+    animation: fadeUp 0.8s ease both;
 }
-
-.date-badge {
-    background: var(--black);
-    color: var(--white);
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-
 /* ===============================
-   STAT CARDS
+   SINGLE STAT CARDS DESIGN
 ================================ */
-.stat-card {
-    padding: 22px;
+.stat-card-single {
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
     transition: var(--transition);
+    border: 1px solid transparent;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    
 }
 
-.stat-card:hover {
-    transform: translateY(-6px);
+.stat-card-single:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    
 }
 
-.zebra-stat-dark {
-    background: var(--black);
+.stat-card-single.zebra-stat-dark {
+    background: linear-gradient(135deg, var(--black) 0%, #222 100%);
     color: var(--white);
+    border-color: var(--black);
+    
 }
 
-.zebra-stat-light {
-    background: var(--white);
+.stat-card-single.zebra-stat-light {
+    background: linear-gradient(135deg, var(--white) 0%, #f8f9fa 100%);
     color: var(--black);
     border: 1px solid var(--gray);
 }
 
-.stat-icon-wrapper {
-    font-size: 2rem;
+.stat-icon-single {
+    font-size: 1rem;
     opacity: 0.85;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
 }
 
-.stat-value {
-    font-size: 2.2rem;
-    font-weight: 800;
+.stat-card-single.zebra-stat-dark .stat-icon-single {
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
 }
 
-.stat-label {
-    font-size: 0.95rem;
-    opacity: 0.8;
+.stat-card-single.zebra-stat-light .stat-icon-single {
+    background: rgba(0,0,0,0.05);
+    color: var(--black);
 }
 
-.stat-progress {
+.stat-progress-single {
+    width: 60px;
     height: 6px;
     background: rgba(255,255,255,0.2);
     border-radius: 10px;
     overflow: hidden;
+    z-index: 2;
 }
 
-.zebra-stat-light .stat-progress {
-    background: var(--gray);
+.stat-card-single.zebra-stat-light .stat-progress-single {
+    background: rgba(0,0,0,0.1);
 }
 
-.progress-bar {
+.progress-bar-single {
     height: 100%;
     background: currentColor;
+    transition: width 1s ease-in-out;
+    border-radius: 10px;
+}
+
+.stat-value-single {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-card-single.zebra-stat-light .stat-value-single {
+    color: var(--black);
+    text-shadow: none;
+}
+
+.stat-label-single {
+    font-size: 0.5rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Decorative element */
+.stat-card-single::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.stat-card-single.zebra-stat-light::before {
+    background: rgba(0,0,0,0.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stat-card-single {
+        padding: 1.25rem;
+    }
+    
+    .stat-icon-single {
+        font-size: 1.5rem;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .stat-value-single {
+        font-size: 1.8rem;
+    }
+    
+    .stat-progress-single {
+        width: 50px;
+        height: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .stat-card-single {
+        padding: 1rem;
+    }
+    
+    .stat-icon-single {
+        font-size: 1.3rem;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .stat-value-single {
+        font-size: 1.6rem;
+    }
+    
+    .stat-label-single {
+        font-size: 0.8rem;
+    }
+}
+
+/* JavaScript for Circular Progress Animation */
+
+/* ===============================
+   TIMELINE
+================================ */
+.timeline {
+    position: relative;
+    padding-left: 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--black), var(--gray));
+    opacity: 0.3;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+    position: relative;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-date {
+    background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+    color: var(--white);
+    padding: 0.85rem;
+    border-radius: var(--radius);
+    text-align: center;
+    min-width: 4.5rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.timeline-content {
+    flex-grow: 1;
+    background: linear-gradient(135deg, #f8f9fa 0%, var(--white) 100%);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.timeline-title {
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+}
+
+.timeline-desc {
+    font-size: 0.9rem;
+    color: var(--gray-dark);
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.timeline-stage {
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+    color: var(--white);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    white-space: nowrap;
 }
 
 /* ===============================
-   SECTIONS
+   FORM ELEMENTS
 ================================ */
-.dashboard-section {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 22px;
+.date-picker-form .input-group {
+    min-width: 280px;
+    max-width: 320px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    border-radius: 30px;
+    overflow: hidden;
+    border: 2px solid var(--black);
+
 }
 
-.section-header {
-    border-bottom: 1px solid var(--gray);
-    margin-bottom: 18px;
-    padding-bottom: 10px;
+.date-input {
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
-.section-title {
-    font-weight: 700;
-    font-size: 1.25rem;
+.date-input:focus {
+    box-shadow: none;
+    border-color: var(--black);
+}
+
+.date-picker-form .btn {
+    background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+.date-picker-form .btn:hover {
+    background: linear-gradient(135deg, #333 0%, #222 100%);
 }
 
 /* ===============================
@@ -137,202 +302,461 @@ a {
 ================================ */
 .dashboard-calendar {
     background: var(--white);
-    border-radius: var(--radius);
-}
-
-.fc {
-    --fc-border-color: var(--gray);
-    --fc-button-bg-color: var(--black);
-    --fc-button-border-color: var(--black);
-    --fc-button-text-color: var(--white);
+    border-radius: calc(var(--radius) - 4px);
+    overflow: hidden;
+    min-height: 500px;
+    border: 1px solid var(--gray);
+    width: 100%;
 }
 
 /* ===============================
-   STAGE CARDS
+   YOUR CASES TABLE - FIXED ALIGNMENT
 ================================ */
-.stage-card {
-    background: var(--gray-light);
-    border-radius: var(--radius);
-    padding: 18px;
-    text-align: center;
-    transition: var(--transition);
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: calc(var(--radius) - 4px);
+    border: 1px solid rgba(0,0,0,0.1);
 }
 
-.stage-card:hover {
-    background: var(--black);
-    color: var(--white);
-}
-
-.stage-badge {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--black);
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 10px;
-    font-weight: 700;
-}
-
-.stage-card:hover .stage-badge {
-    background: var(--white);
-    color: var(--black);
-}
-
-.stage-link {
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-/* ===============================
-   TABLES
-================================ */
 .dashboard-table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 0;
 }
 
-.dashboard-table th {
-    background: var(--black);
-    color: var(--white);
-    padding: 12px;
+.dashboard-table thead th {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 2px solid var(--gray);
+    padding: 1rem;
+    font-weight: 400;
+    color: var(--black);
     text-align: left;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.dashboard-table td {
-    padding: 12px;
-    border-bottom: 1px solid var(--gray);
+.dashboard-table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    vertical-align: middle;
+    background: var(--white);
 }
 
-.dashboard-table tr:hover {
-    background: var(--gray-light);
+.dashboard-table tbody tr:hover {
+    background-color: rgba(0,0,0,0.02);
 }
 
-.table-row-animate {
-    animation: rowFade 0.6s ease both;
+.dashboard-table tbody tr.case-row {
+    animation: fadeUp 0.5s ease both;
 }
 
-@keyframes rowFade {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Court Display */
+.court-display {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
-/* ===============================
-   BADGES
-================================ */
-.court-badge,
-.stage-tag {
-    background: var(--black);
-    color: var(--white);
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
+.court-display i {
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+}
+
+/* Case Number */
+.dashboard-table td strong {
+    color: var(--black);
+    font-weight: 700;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Date Display */
+.date-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date-day {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--black);
+}
+
+.date-month {
+    font-size: 0.85rem;
+    color: var(--gray-dark);
+    margin-top: 0.25rem;
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    min-width: 80px;
 }
 
 .status-badge.active {
-    background: var(--black);
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
     color: var(--white);
-    padding: 6px 12px;
-    border-radius: 14px;
-    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
 }
 
-/* ===============================
-   TIMELINE
-================================ */
-.timeline-item {
-    display: flex;
-    gap: 14px;
-    margin-bottom: 16px;
-}
-
-.timeline-date {
-    background: var(--black);
-    color: var(--white);
-    padding: 10px;
-    border-radius: var(--radius);
-    text-align: center;
-    min-width: 55px;
-}
-
-.timeline-title {
-    font-weight: 700;
-}
-
-/* ===============================
-   QUICK ACTIONS
-================================ */
-.quick-actions-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-}
-
-.quick-action-card {
-    background: var(--gray-light);
-    border-radius: var(--radius);
-    padding: 18px;
-    text-align: center;
-    transition: var(--transition);
-}
-
-.quick-action-card:hover {
-    background: var(--black);
-    color: var(--white);
-}
-
-.action-icon {
-    font-size: 1.8rem;
-    margin-bottom: 6px;
-}
-
-/* ===============================
-   BUTTONS
-================================ */
-.btn-zebra-black {
-    background: var(--black);
-    color: var(--white);
-    border-radius: 25px;
-    padding: 8px 18px;
-    border: none;
-}
-
-.btn-zebra-black:hover {
-    background: var(--gray-dark);
-}
-
-/* ===============================
-   ACTION BUTTONS
-================================ */
+/* Action Buttons */
 .action-buttons {
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
+    justify-content: flex-start;
 }
 
 .btn-action {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: var(--black);
-    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition);
+    border: 1px solid var(--gray);
+    color: var(--black);
+    text-decoration: none;
+    background: transparent;
+    font-size: 0.9rem;
 }
 
 .btn-action:hover {
-    background: var(--gray-dark);
+    transform: translateY(-3px);
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.btn-add-stage:hover {
+    background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+    color: var(--white);
+    border-color: var(--black);
+}
+
+.btn-view-details:hover {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: var(--white);
+    border-color: #007bff;
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    color: var(--white);
+    border-color: #ffc107;
+}
+
+/* Court Badge */
+.court-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+    color: var(--white);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Stage Tag */
+.stage-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: var(--black);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid var(--gray);
+    white-space: nowrap;
+}
+
+/* Case Name Cell */
+.case-name-cell {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notes-cell {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ===============================
    EMPTY STATES
 ================================ */
-.empty-state,
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--gray-dark);
+}
+
+.empty-state i {
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+
 .empty-state-large {
     text-align: center;
-    padding: 40px;
+    padding: 4rem 2rem;
     color: var(--gray-dark);
+}
+
+.empty-state-large .empty-icon {
+    margin-bottom: 1.5rem;
+    opacity: 0.2;
+    font-size: 2rem;
+}
+
+.empty-state-large h4 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+    font-size: 1.5rem;
+}
+
+.empty-state-large p {
+    margin-bottom: 1.5rem;
+    color: var(--gray-dark);
+    font-size: 1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================ */
+@media (max-width: 1200px) {
+    .zebra-stat-card {
+        min-height: 200px;
+        padding: 1.75rem;
+    }
+    
+    .stat-value {
+        font-size: 2.5rem;
+    }
+    
+    .stat-icon-wrapper {
+        font-size: 2.4rem;
+    }
+    
+    .dashboard-calendar {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .zebra-stat-card {
+        min-height: 180px;
+        padding: 1.5rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
+    }
+    
+    .stat-icon-wrapper {
+        font-size: 1rem;
+    }
+    
+    .stat-progress {
+        width: 60px;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .dashboard-section {
+        padding: 1.5rem;
+    }
+    
+    .dashboard-title {
+        font-size: 1.5rem;
+    }
+    
+    .date-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 0.7rem;
+    }
+    
+    .zebra-stat-card {
+        min-height: 160px;
+        padding: 1.5rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
+    }
+    
+    .stat-icon-wrapper {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+    }
+    
+    .stage-card {
+        padding: 1.5rem;
+    }
+    
+    .stage-badge {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.6rem;
+    }
+    
+    .stage-name {
+        font-size: 1.1rem;
+    }
+    
+  
+    
+    .action-icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+    
+   
+    .date-picker-form .input-group {
+        max-width: 100%;
+        min-width: auto;
+    }
+    
+    .timeline::before {
+        left: 1.5rem;
+    }
+    
+    .timeline-date {
+        min-width: 4rem;
+        padding: 0.75rem;
+    }
+    
+    .dashboard-table thead th,
+    .dashboard-table tbody td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .action-buttons {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    
+    .btn-action {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+    
+    .empty-state-large {
+        padding: 3rem 1rem;
+    }
+    
+    .empty-state-large .empty-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .zebra-stat-card {
+        min-height: 150px;
+        padding: 1.25rem;
+    }
+    
+    .stat-value {
+        font-size: 1.8rem;
+    }
+    
+    .stat-progress {
+        width: 50px;
+        height: 6px;
+        top: 1.25rem;
+        right: 1.25rem;
+    }
+    
+  
+    
+    .action-icon {
+        font-size: 1.8rem;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .timeline::before {
+        left: 2rem;
+    }
+    
+    .timeline-date {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .date-display {
+        align-items: center;
+    }
+    
+    .date-day {
+        font-size: 1rem;
+    }
+    
+    .date-month {
+        font-size: 0.75rem;
+    }
+    
+    .status-badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        min-width: 70px;
+    }
+    
+    .empty-state-large h4 {
+        font-size: 1.3rem;
+    }
+    
+    .empty-state-large p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Striped rows for better readability */
+.dashboard-table tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.01);
+}
+
+.dashboard-table tbody tr:nth-child(even):hover {
+    background-color: rgba(0,0,0,0.03);
 }
