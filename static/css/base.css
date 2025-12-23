@@ -587,7 +587,7 @@ body {
 }
 
 .stat-value {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
     color: var(--black);
@@ -607,7 +607,7 @@ body {
     background-color: var(--white);
     border-top: 1px solid rgba(0,0,0,0.1);
     margin-top: 5rem;
-    padding-top: 3rem;
+    padding-top: 2.9rem;
 }
 
 .footer-brand {
